@@ -1,0 +1,7 @@
+# application:
+app:
+  weather-summary-api: https://forecast9.p.rapidapi.com/rapidapi/forecast/{city}/summary/
+  weather-hourly-api: https://forecast9.p.rapidapi.com/rapidapi/forecast/{city}/hourly/
+  header-key: DUMMY_HEADER_KEY
+  host-key: DUMMY_HOST_KEY
+

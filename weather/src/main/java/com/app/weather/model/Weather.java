@@ -1,19 +1,34 @@
 package com.app.weather.model;
 
 public class Weather {
-    String cityName;
-    String status;
+    private Location location;
 
-    public Weather(String cityName, String status) {
-        this.cityName = cityName;
-        this.status = status;
+    private Forecast forecast;
+
+    private String errorMessage;
+
+
+    public Location getLocation() {
+        return location;
     }
 
-    public String getCityName() {
-        return cityName;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public String getStatus() {
-        return status;
+    public Forecast getForecast() {
+        return forecast;
+    }
+
+    public void setForecast(Forecast forecast) {
+        this.forecast = forecast;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }
