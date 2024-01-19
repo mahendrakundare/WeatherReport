@@ -5,3 +5,8 @@ app:
   header-key: DUMMY_HEADER_KEY
   host-key: DUMMY_HOST_KEY
 
+api:
+  auth:
+    header:
+      name: x-auth-secret-key
+    secret: ABCDEFGHIJKLM

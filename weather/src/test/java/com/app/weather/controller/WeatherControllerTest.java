@@ -3,7 +3,6 @@ package com.app.weather.controller;
 import com.app.weather.model.Location;
 import com.app.weather.model.Weather;
 import com.app.weather.service.WeatherService;
-import org.apache.coyote.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -11,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +22,7 @@ class WeatherControllerTest {
     WeatherService weatherService;
 
     @Test
-    void fetchWeatherSummaryByCityName_shouldReturnResponseForTheGiveCity() throws BadRequestException {
+    void fetchWeatherSummaryByCityName_shouldReturnResponseForTheGiveCity() {
         Weather weather = getWeather();
         String cityName = "berlin";
         when(weatherService.fetchWeatherSummaryByCityName(anyString())).thenReturn(ResponseEntity.ok(weather));
@@ -36,10 +34,10 @@ class WeatherControllerTest {
     }
 
     @Test
-    void fetchHourlyWeatherByCityName_shouldReturnResponseForTheGiveCity() throws BadRequestException {
+    void fetchHourlyWeatherByCityName_shouldReturnResponseForTheGiveCity() {
         Weather weather = getWeather();
         String cityName = "berlin";
-        when(weatherService.fetchHourlyWeatherByCityName(cityName)).thenReturn(ResponseEntity.ok(weather));
+        when(weatherService.fetchHourlyWeatherByCityName(anyString())).thenReturn(ResponseEntity.ok(weather));
 
         ResponseEntity<Weather> response = weatherController.fetchHourlyWeatherByCityName(cityName);
 
@@ -49,7 +47,8 @@ class WeatherControllerTest {
 
     @Test
     void shouldThrowErrorIfCitNameIsInvalid() {
-        assertThrows(BadRequestException.class, () -> weatherController.fetchWeatherSummaryByCityName("invalid city name1334"));
+        ResponseEntity<Weather> response = weatherController.fetchWeatherSummaryByCityName("invalid city name1334");
+        assertThat(response.getStatusCode().is4xxClientError());
     }
 
     public Weather getWeather() {

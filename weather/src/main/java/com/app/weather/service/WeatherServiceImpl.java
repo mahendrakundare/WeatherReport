@@ -29,12 +29,6 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
 
-//    public WeatherServiceImpl(RestTemplate restTemplate, AppProperties appProperties) {
-//        restTemplate = restTemplate;
-//        this.appProperties = appProperties;
-//    }
-
-
     @Override
     public ResponseEntity<Weather> fetchWeatherSummaryByCityName(String city) {
        return fetchResponse(appProperties.getWeatherSummaryApi(), city);

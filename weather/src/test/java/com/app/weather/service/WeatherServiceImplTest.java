@@ -3,7 +3,6 @@ package com.app.weather.service;
 import com.app.weather.config.AppProperties;
 import com.app.weather.model.Location;
 import com.app.weather.model.Weather;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -46,7 +45,7 @@ class WeatherServiceImplTest {
         when(appProperties.getHostKey()).thenReturn("X-RapidAPI-Host");
         when(appProperties.getHeaderKey()).thenReturn("random-key");
         when(appProperties.getWeatherSummaryApi()).thenReturn("http://dummyURL:8080/berlin/summary");
-        when(restTemplate.exchange("http://dummyURL:8080/berlin/summary", HttpMethod.GET, entity, Weather.class)).thenReturn(new ResponseEntity<>(weather, HttpStatus.OK));
+        when(restTemplate.exchange("http://dummyURL:8080/berlin/summary", HttpMethod.GET, entity, Weather.class, cityName)).thenReturn(new ResponseEntity<>(weather, HttpStatus.OK));
 
         ResponseEntity<Weather> response = weatherService.fetchWeatherSummaryByCityName(cityName);
 
@@ -66,7 +65,7 @@ class WeatherServiceImplTest {
         when(appProperties.getHostKey()).thenReturn("X-RapidAPI-Host");
         when(appProperties.getHeaderKey()).thenReturn("random-key");
         when(appProperties.getHourlyWeatherApi()).thenReturn("http://dummyURL:8080/berlin/hourly");
-        when(restTemplate.exchange("http://dummyURL:8080/berlin/hourly", HttpMethod.GET, entity, Weather.class)).thenReturn(new ResponseEntity<>(weather, HttpStatus.OK));
+        when(restTemplate.exchange("http://dummyURL:8080/berlin/hourly", HttpMethod.GET, entity, Weather.class, cityName)).thenReturn(new ResponseEntity<>(weather, HttpStatus.OK));
 
 
 
